@@ -1,8 +1,5 @@
-{% if news.title %}
-    <title>{{ news.title }}</title>
-{% else %}
-    <title> Justica: Blogs </title>
-{% endif %}
+<title> Justica: Upload News </title>
+
 <!DOCTYPE html>
 {% load static %}
 <html lang="zxx">
@@ -84,12 +81,12 @@
                                 </ul>
                                 <!-- mainmenu close -->
                             </div>
-                            
+
                             <div class="de-flex-col">
                                 <div class="h-phone md-hide"><span>Need&nbsp;Help?</span><i class="fa fa-phone"></i><a href="callto:">1 200 300 9000</a></div>
                                 <span id="menu-btn"></span>
                             </div>
-                            
+
                         </div>
                     </div>
                 </div>
@@ -106,11 +103,7 @@
                     <div class="container">
                         <div class="row">
                             <div class="col-md-12 text-center">
-                                {% if news.title %}
-                                    <h1>Blog Title: {{ news.title }}</h1>
-                                {% else %}
-                                    <h1> This blog doesn't exist </h1>
-                                {% endif %}
+                                    <h1>Upload News</h1>
                             </div>
                             <div class="clearfix"></div>
                         </div>
@@ -121,142 +114,11 @@
             <!-- section begin -->
             <section aria-label="section">
                 <div class="container">
-                    <div class="row">
-                        <div class="col-md-8">
-                            <div class="blog-read">
-                                <img alt="{{ news.title }}" src="{{ news.image.url }}" class="newsbanner"/>
-                                <div class="post-text">
-                                    <p style="text-align: justify">{{ news.content }}</p>
-                                    <span class="post-date">{{ news.date_published }}</span>
-                                    <span class="post-author">{{ news.author }}</span>
-                                    <span class="post-like">181</span>
-                                </div>
-                            </div>
-                            <div class="spacer-single"></div>
-                            <div id="blog-comment">
-                                <h4>Comments (5)</h4>
-                                <div class="spacer-half"></div>
-                                <ol>
-                                    <li>
-                                        <div class="avatar">
-                                            <img src="{% static 'images/misc/avatar.png' %}" alt="" /></div>
-                                        <div class="comment-info">
-                                            <span class="c_name">John Smith</span>
-                                            <span class="c_date id-color">15 January 2020</span>
-                                            <span class="c_reply"><a href="#">Reply</a></span>
-                                            <div class="clearfix"></div>
-                                        </div>
-                                        <div class="comment">Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.</div>
-                                        <ol>
-                                            <li>
-                                                <div class="avatar">
-                                                    <img src="{% static 'images/misc/avatar.png' %}" alt="" /></div>
-                                                <div class="comment-info">
-                                                    <span class="c_name">John Smith</span>
-                                                    <span class="c_date id-color">15 January 2020</span>
-                                                    <span class="c_reply"><a href="#">Reply</a></span>
-                                                    <div class="clearfix"></div>
-                                                </div>
-                                                <div class="comment">Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt
-                                                    explicabo.</div>
-                                            </li>
-                                        </ol>
-                                    </li>
-                                    <li>
-                                        <div class="avatar">
-                                            <img src="{% static 'images/misc/avatar.png' %}" alt="" /></div>
-                                        <div class="comment-info">
-                                            <span class="c_name">John Smith</span>
-                                            <span class="c_date id-color">15 January 2020</span>
-                                            <span class="c_reply"><a href="#">Reply</a></span>
-                                            <div class="clearfix"></div>
-                                        </div>
-                                        <div class="comment">Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.</div>
-                                        <ol>
-                                            <li>
-                                                <div class="avatar">
-                                                    <img src="{% static 'images/misc/avatar.png' %}" alt="" /></div>
-                                                <div class="comment-info">
-                                                    <span class="c_name">John Smith</span>
-                                                    <span class="c_date id-color">15 January 2020</span>
-                                                    <span class="c_reply"><a href="#">Reply</a></span>
-                                                    <div class="clearfix"></div>
-                                                </div>
-                                                <div class="comment">Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt
-                                                    explicabo.</div>
-                                            </li>
-                                        </ol>
-                                    </li>
-                                    <li>
-                                        <div class="avatar">
-                                            <img src="{% static 'images/misc/avatar.png' %}" alt="" /></div>
-                                        <div class="comment-info">
-                                            <span class="c_name">John Smith</span>
-                                            <span class="c_date id-color">15 January 2020</span>
-                                            <span class="c_reply"><a href="#">Reply</a></span>
-                                            <div class="clearfix"></div>
-                                        </div>
-                                        <div class="comment">Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.</div>
-                                    </li>
-                                </ol>
-                                <div class="spacer-single"></div>
-                                <div id="comment-form-wrapper">
-                                    <h4>Leave a Comment</h4>
-                                    <div class="comment_form_holder">
-                                        <form id="contact_form" name="form1" class="form-default" method="post" action="#">
-                                            <label>Name</label>
-                                            <input type="text" name="name" id="name" class="form-control" />
-                                            <label>Email <span class="req">*</span></label>
-                                            <input type="text" name="email" id="email" class="form-control" />
-                                            <div id="error_email" class="error">Please check your email</div>
-                                            <label>Message <span class="req">*</span></label>
-                                            <textarea cols="10" rows="10" name="message" id="message" class="form-control"></textarea>
-                                            <div id="error_message" class="error">Please check your message</div>
-                                            <div id="mail_success" class="success">Thank you. Your message has been sent.</div>
-                                            <div id="mail_failed" class="error">Error, email not sent</div>
-                                            <p id="btnsubmit">
-                                                <input type="submit" id="send" value="Send" class="btn btn-custom" /></p>
-                                        </form>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div id="sidebar" class="col-md-4">
-                            <div class="widget widget-post">
-                                <h4>Recent Posts</h4>
-                                <div class="small-border"></div>
-                                <ul>
-                                    {% for news in recent_articles %}
-                                        <li><span class="date">{{ news.date_published }}</span><a href="{% url 'newsT' news.id %}">&nbsp;{{ news.title|truncatechars:30 }} </a></li>
-                                    {% endfor %}
-                                </ul>
-                            </div>
-                            <div class="widget widget-text">
-                                <h4>About Us</h4>
-                                <div class="small-border"></div>
-                                Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas
-                                sit aspernatur aut odit aut fugit, sed quia consequuntur magni
-                            </div>
-                            <div class="widget widget_tags">
-                                <h4>Tags</h4>
-                                <div class="small-border"></div>
-                                <ul>
-                                    <li><a href="#link">Art</a></li>
-                                    <li><a href="#link">Application</a></li>
-                                    <li><a href="#link">Design</a></li>
-                                    <li><a href="#link">Entertainment</a></li>
-                                    <li><a href="#link">Internet</a></li>
-                                    <li><a href="#link">Marketing</a></li>
-                                    <li><a href="#link">Multipurpose</a></li>
-                                    <li><a href="#link">Music</a></li>
-                                    <li><a href="#link">Print</a></li>
-                                    <li><a href="#link">Programming</a></li>
-                                    <li><a href="#link">Responsive</a></li>
-                                    <li><a href="#link">Website</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
+                    <form method="post">
+                        {% csrf_token %}
+                        {{ form.as_p }}
+                        <button>Upload</button>
+                    </form>
                 </div>
             </section>
         </div>
@@ -333,10 +195,22 @@
             </div>
         </div>
     </div>
-{#    <div id="purchase-now">#}
-{#        <a href="{% url 'cart' %}"><span>$</span>15</a>#}
-{#        <div class="pn-hover">Buy Now</div>#}
-{#    </div>#}
+    <div id="selector">
+        <div class="sc-opt sc-mt">
+            <div class="sc-icon"><i class="fa fa-eyedropper"></i></div>
+            <span class="opt tc1" data-color="scheme-01"></span>
+            <span class="opt tc2" data-color="scheme-02"></span>
+            <span class="opt tc3" data-color="scheme-03"></span>
+            <span class="opt tc4" data-color="scheme-04"></span>
+            <span class="opt tc5" data-color="scheme-05"></span>
+            <span class="opt tc6" data-color="scheme-06"></span>
+            <span class="opt tc7" data-color="scheme-07"></span>
+        </div>
+    </div>
+    <div id="purchase-now">
+        <a href="{% url 'cart' %}"><span>$</span>15</a>
+        <div class="pn-hover">Buy Now</div>
+    </div>
     <!-- Javascript Files
     ================================================== -->
     <script src="{% static 'js/jquery.min.js' %}"></script>

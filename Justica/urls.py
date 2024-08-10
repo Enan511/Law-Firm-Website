@@ -10,6 +10,7 @@ urlpatterns = [
     # path('news/', views.news, name='news'),
     path('news/<int:news_id>', views.newsdetail, name='newsT'),
     path('all_news/', views.all_news, name='allnews'),
+    path('upload_news/',views.upload_news, name='upload_news'),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

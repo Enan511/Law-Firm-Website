@@ -1,3 +1,8 @@
+{% if title %}
+    <title>{{ title }}</title>
+{% else %}
+    <title> Justica: Blogs </title>
+{% endif %}
 <!DOCTYPE html>
 {% load static %}
 <html lang="zxx">
@@ -75,13 +80,16 @@
                                 <!-- mainmenu begin -->
                                 <ul id="mainmenu" class="onepage-menu">
                                     <li><a href="{% url 'home' %}">Home</a></li>
+                                    <li><a href="{% url 'allnews' %}">More news</a></li>
                                 </ul>
                                 <!-- mainmenu close -->
                             </div>
+                            
                             <div class="de-flex-col">
-                                <div class="h-phone md-hide"><span>Need&nbsp;Help?</span><i class="fa fa-phone"></i> 1 200 300 9000</div>
+                                <div class="h-phone md-hide"><span>Need&nbsp;Help?</span><i class="fa fa-phone"></i><a href="callto:">1 200 300 9000</a></div>
                                 <span id="menu-btn"></span>
                             </div>
+                            
                         </div>
                     </div>
                 </div>
@@ -98,7 +106,11 @@
                     <div class="container">
                         <div class="row">
                             <div class="col-md-12 text-center">
-                                <h1>{{ pk }}</h1>
+                                {% if news.title %}
+                                    <h1>Blog Title: {{ news.title }}</h1>
+                                {% else %}
+                                    <h1> This blog doesn't exist </h1>
+                                {% endif %}
                             </div>
                             <div class="clearfix"></div>
                         </div>
@@ -112,20 +124,11 @@
                     <div class="row">
                         <div class="col-md-8">
                             <div class="blog-read">
-                                <img alt="" src="{% static 'images/news/5.jpg' %}" class="img-fullwidth">
+                                <img alt="{{ news.title }}" src="{{ news.image.url }}" class="newsbanner"/>
                                 <div class="post-text">
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                                        consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id
-                                        est laborum.</p>
-                                    <blockquote>Your attitude will go a long way in determining your success, your recognition, your reputation and your enjoyment in being a lawyer.</blockquote>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                                        consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id
-                                        est laborum.</p>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                                        consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id
-                                        est laborum.</p>
-                                    <span class="post-date">April 1, 2018</span>
-                                    <span class="post-comment">1</span>
+                                    <p>{{ news.content }}</p>
+                                    <span class="post-date">{{ news.date_published }}</span>
+                                    <span class="post-author">{{ news.author }}</span>
                                     <span class="post-like">181</span>
                                 </div>
                             </div>
@@ -223,10 +226,9 @@
                                 <h4>Recent Posts</h4>
                                 <div class="small-border"></div>
                                 <ul>
-                                    <li><span class="date">10 Jun</span><a href="#">The Lawyer European Awards shortlist</a></li>
-                                    <li><span class="date">22 Jun</span><a href="#">Six firms that are setting the trend</a></li>
-                                    <li><span class="date">20 Jun</span><a href="#">When it comes to law firm mergers</a></li>
-                                    <li><span class="date">12 Jun</span><a href="#">How to Make the Most of Your CLE</a></li>
+                                    {% for news in news_articles %}
+                                        <li><span class="date">{{ news.date_published }}</span><a href="{% url 'newsT' news.id %}">{{ news.title }}</a></li>
+                                    {% endfor %}
                                 </ul>
                             </div>
                             <div class="widget widget-text">

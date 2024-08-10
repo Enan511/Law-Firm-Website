@@ -595,6 +595,7 @@
                     </div>
                 </div>
             </section>
+            <!-- News List -->
             <section id="section-news">
                 <div class="container">
                     <div class="row">
@@ -606,66 +607,31 @@
                         </div>
                     </div>
                     <div class="row">
+                        {% for news in news_articles %}
                         <div class="col-lg-4 col-md-6 mb30">
                             <div class="bloglist item">
                                 <div class="post-content">
                                     <div class="date-box">
-                                        <div class="m">10</div>
-                                        <div class="d">NOV</div>
+                                        <div class="d">{{ news.date_published|date:"d" }}</div>
+                                        <div class="m">{{ news.date_published|date:"m" }}</div>
                                     </div>
                                     <div class="post-image">
-                                        <img alt="" src="{% static 'images/news/1.jpg' %}">
+                                        <img alt="{{ news.title }}" src="{{ news.image.url }}">
                                     </div>
                                     <div class="post-text">
                                         <span class="p-tagline">Law Firm</span>
-                                        <h4><a href="{% url 'news' %}">The Lawyer European Awards shortlist<span></span></a></h4>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                                        <span class="p-author">Fynley Wilkinson</span>
+                                        <h4><a href="{% url 'newsT' news.id %}">{{ news.title }}</a></h4>
+                                        <p>{{ news.description|truncatewords:20 }}</p>
+                                        <span class="p-author">{{ news.author }}</span>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-lg-4 col-md-6 mb30">
-                            <div class="bloglist item">
-                                <div class="post-content">
-                                    <div class="date-box">
-                                        <div class="m">15</div>
-                                        <div class="d">NOV</div>
-                                    </div>
-                                    <div class="post-image">
-                                        <img alt="" src="{% static 'images/news/2.jpg' %}">
-                                    </div>
-                                    <div class="post-text">
-                                        <span class="p-tagline">Law Firm</span>
-                                        <h4><a href="{% url 'news' %}">Six firms that are setting the trend<span></span></a></h4>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                                        <span class="p-author">Fynley Wilkinson</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-4 col-md-6 mb30">
-                            <div class="bloglist item">
-                                <div class="post-content">
-                                    <div class="date-box">
-                                        <div class="m">20</div>
-                                        <div class="d">NOV</div>
-                                    </div>
-                                    <div class="post-image">
-                                        <img alt="" src="{% static 'images/news/3.jpg' %}">
-                                    </div>
-                                    <div class="post-text">
-                                        <span class="p-tagline">Law Firm</span>
-                                        <h4><a href="{% url 'news' %}">When it comes to law firm mergers<span></span></a></h4>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                                        <span class="p-author">Fynley Wilkinson</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        {% endfor %}
                     </div>
                 </div>
             </section>
+
             <section id="section-text" data-bgcolor="#111111" class="text-light">
                 <div class="container">
                     <div class="row align-items-center">

@@ -1,5 +1,5 @@
 from django import forms
-from .models import News
+from .models import News,Comment
 
 class NewsForm(forms.ModelForm):
     class Meta:
@@ -20,3 +20,13 @@ class NewsForm(forms.ModelForm):
         if not content_file:
             raise forms.ValidationError('Please provide content or upload a file.')
         return cleaned_data
+
+class CommentForm(forms.ModelForm):
+    class Meta:
+        model = Comment
+        fields = ['name', 'email', 'message']
+        widgets = {
+            'name': forms.TextInput(attrs={'class': 'form-control'}),
+            'email': forms.TextInput(attrs={'class': 'form-control'}),
+            'message': forms.Textarea(attrs={'class': 'form-control'}),
+        }

@@ -1,6 +1,6 @@
 from django.shortcuts import render, get_object_or_404, redirect
-from .models import News
-from .forms import NewsForm
+from .models import News,Comment
+from .forms import NewsForm,CommentForm
 
 
 # Create your views here.
@@ -15,8 +15,19 @@ def news(request):
 
 def newsdetail(request, news_id):
     news = get_object_or_404(News, id=news_id)
+    comments = news.comments.all()
+    comment_count = comments.count()
+    if request.method == 'POST':
+        form = CommentForm(request.POST)
+        if form.is_valid():
+            comment = form.save(commit=False)
+            comment.news = news
+            comment.save()
+            return redirect('newsT', news_id=news_id)  # Redirect to avoid form resubmission
+    else:
+        form = CommentForm()
     recent_articles = News.objects.all().order_by('-date_published')[:5]
-    context = {'news': news, 'recent_articles': recent_articles}
+    context = {'news': news, 'recent_articles': recent_articles, 'comments': comments, 'form': form, 'comment_count': comment_count}
     return render(request, 'news-single.html', context)
 
 

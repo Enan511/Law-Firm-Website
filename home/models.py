@@ -1,5 +1,5 @@
 from django.db import models
-
+from django.contrib.auth.models import User
 class News(models.Model):
     title = models.CharField(max_length=200)
     content_file = models.FileField(upload_to='news_files',blank=True,null=True)
@@ -12,3 +12,10 @@ class News(models.Model):
         if self.content_file:
             return self.content_file.read().decode('utf-8')
         return ""
+
+class Comment(models.Model):
+    news = models.ForeignKey(News, related_name='comments', on_delete=models.CASCADE)
+    name = models.CharField(max_length=100)
+    email = models.EmailField()
+    message = models.TextField()
+    date_posted = models.DateTimeField(auto_now_add=True)

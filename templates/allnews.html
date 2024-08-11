@@ -49,7 +49,7 @@
                 <div class="topbar-right">
                     <div class="topbar-right">
                         <span class="topbar-widget"><a href="#">Privacy policy</a></span>
-                        <span class="topbar-widget"><a href="#">Request Quote</a></span>
+                        <span class="topbar-widget"><a href="{% url 'upload_news' %}">Add a news</a></span>
                         <span class="topbar-widget"><a href="#">FAQ</a></span>
                     </div>
                 </div>
@@ -127,19 +127,19 @@
                         {% for news in news_articles %}
                         <div class="col-lg-4 col-md-6 mb30">
                             <div class="bloglist item">
-                                <div class="post-content">
-                                    <div class="date-box">
-                                        <div class="d">{{ news.date_published|date:"d" }}</div>
-                                        <div class="m-auto">{{ news.date_published|date:"m" }}</div>
+                                <div class="post-content" style="border: 1px solid #ddd; padding: 15px; height: 100%;">
+                                    <div class="date-box" style="text-align: center; margin-bottom: 15px;">
+                                        <div class="d" style="font-size: 24px; font-weight: bold;">{{ news.date_published|date:"d" }}</div>
+                                        <div class="m-auto" style="font-size: 16px; color: #777;">{{ news.date_published|date:"M" }}</div>
                                     </div>
-                                    <div class="post-image">
-                                        <img alt="{{ news.title }}" src="{{ news.image.url }}">
+                                    <div class="post-image" style="text-align: center; margin-bottom: 15px;">
+                                        <img alt="{{ news.title }}" src="{{ news.image.url }}" style="max-width: 100%; height: auto;">
                                     </div>
                                     <div class="post-text">
-                                        <span class="p-tagline">Law Firm</span>
-                                        <h4><a href="{% url 'newsT' news.id %}">{{ news.title }}</a></h4>
-                                        <p>{{ news.description|truncatewords:20 }}</p>
-                                        <span class="p-author">{{ news.author }}</span>
+                                        <span class="p-tagline" style="display: block; margin-bottom: 10px;">Law Firm</span>
+                                        <h4 style="font-size: 18px; margin-bottom: 10px;"><a href="{% url 'newsT' news.id %}" style="text-decoration: none; color: #333;">{{ news.title }}</a></h4>
+                                        <p style="margin-bottom: 10px;">{{ news.description|truncatewords:20 }}</p>
+                                        <span class="p-author" style="font-size: 14px; color: #555;">{{ news.author }}</span>
                                     </div>
                                 </div>
                             </div>

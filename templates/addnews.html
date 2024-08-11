@@ -50,7 +50,7 @@
                 <div class="topbar-right">
                     <div class="topbar-right">
                         <span class="topbar-widget"><a href="#">Privacy policy</a></span>
-                        <span class="topbar-widget"><a href="#">Request Quote</a></span>
+                        <span class="topbar-widget"><a href="{% url 'upload_news' %}">Add a news</a></span>
                         <span class="topbar-widget"><a href="#">FAQ</a></span>
                     </div>
                 </div>
@@ -114,10 +114,10 @@
             <!-- section begin -->
             <section aria-label="section">
                 <div class="container">
-                    <form method="post">
+                    <form method="post" enctype="multipart/form-data">
                         {% csrf_token %}
                         {{ form.as_p }}
-                        <button>Upload</button>
+                        <button type="submit" class="btn btn-primary btn-lg shadow rounded">Publish News</button>
                     </form>
                 </div>
             </section>
@@ -195,22 +195,10 @@
             </div>
         </div>
     </div>
-    <div id="selector">
-        <div class="sc-opt sc-mt">
-            <div class="sc-icon"><i class="fa fa-eyedropper"></i></div>
-            <span class="opt tc1" data-color="scheme-01"></span>
-            <span class="opt tc2" data-color="scheme-02"></span>
-            <span class="opt tc3" data-color="scheme-03"></span>
-            <span class="opt tc4" data-color="scheme-04"></span>
-            <span class="opt tc5" data-color="scheme-05"></span>
-            <span class="opt tc6" data-color="scheme-06"></span>
-            <span class="opt tc7" data-color="scheme-07"></span>
-        </div>
-    </div>
-    <div id="purchase-now">
-        <a href="{% url 'cart' %}"><span>$</span>15</a>
-        <div class="pn-hover">Buy Now</div>
-    </div>
+{#    <div id="purchase-now">#}
+{#        <a href="{% url 'cart' %}"><span>$</span>15</a>#}
+{#        <div class="pn-hover">Buy Now</div>#}
+{#    </div>#}
     <!-- Javascript Files
     ================================================== -->
     <script src="{% static 'js/jquery.min.js' %}"></script>

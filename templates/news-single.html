@@ -81,6 +81,7 @@
                                 <ul id="mainmenu" class="onepage-menu">
                                     <li><a href="{% url 'home' %}">Home</a></li>
                                     <li><a href="{% url 'allnews' %}">More news</a></li>
+                                    <li><a href="{% url 'edit_news' news.id %}">Edit this news</a></li>
                                 </ul>
                                 <!-- mainmenu close -->
                             </div>
@@ -126,10 +127,12 @@
                             <div class="blog-read">
                                 <img alt="{{ news.title }}" src="{{ news.image.url }}" class="newsbanner"/>
                                 <div class="post-text">
-                                    <p style="text-align: justify">{{ news.content|linebreaks }}</p>
+                                    <p>{{ news.content|safe }}</p>
                                     <span class="post-date">{{ news.date_published }}</span>
                                     <span class="post-author">{{ news.author }}</span>
-                                    <span class="post-like">181</span>
+                                    <button id="like-button" data-news-id="{{ news.id }}" class="btn btn-like">
+                                    <span class="post-like">{{ news.likes }}</span> Likes
+                                    </button>
                                 </div>
                             </div>
                             <div class="spacer-single"></div>
@@ -147,7 +150,7 @@
                                             <div class="comment-info">
                                                 <span class="c_name">{{ comment.name }}</span>
                                                 <span class="c_date id-color">{{ comment.date_posted|date:"d F Y" }}</span>
-                                                <span class="c_reply"><a href="#">Reply</a></span>
+                                                <span class="c_reply">{{ comment.date_posted|date:"h:i A" }}</span>
                                                 <div class="clearfix"></div>
                                             </div>
                                             <div class="comment">{{ comment.message }}</div>
@@ -183,26 +186,8 @@
                             <div class="widget widget-text">
                                 <h4>About Us</h4>
                                 <div class="small-border"></div>
-                                Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas
-                                sit aspernatur aut odit aut fugit, sed quia consequuntur magni
-                            </div>
-                            <div class="widget widget_tags">
-                                <h4>Tags</h4>
-                                <div class="small-border"></div>
-                                <ul>
-                                    <li><a href="#link">Art</a></li>
-                                    <li><a href="#link">Application</a></li>
-                                    <li><a href="#link">Design</a></li>
-                                    <li><a href="#link">Entertainment</a></li>
-                                    <li><a href="#link">Internet</a></li>
-                                    <li><a href="#link">Marketing</a></li>
-                                    <li><a href="#link">Multipurpose</a></li>
-                                    <li><a href="#link">Music</a></li>
-                                    <li><a href="#link">Print</a></li>
-                                    <li><a href="#link">Programming</a></li>
-                                    <li><a href="#link">Responsive</a></li>
-                                    <li><a href="#link">Website</a></li>
-                                </ul>
+                                <p style="text-align: justify">Justica is a law firm website. We provide legal counselling to our clients and judicial services. 
+                                    Please contact us via mail or call our number for any kind of support.</p>
                             </div>
                         </div>
                     </div>
@@ -288,6 +273,7 @@
 {#    </div>#}
     <!-- Javascript Files
     ================================================== -->
+    <script src="{% static 'js/jquery-3.6.0.min.js' %}"></script>
     <script src="{% static 'js/jquery.min.js' %}"></script>
     <script src="{% static 'js/bootstrap.min.js' %}"></script>
     <script src="{% static 'js/wow.min.js' %}"></script>
@@ -318,7 +304,27 @@
     <script type="text/javascript" src="{% static 'revolution/js/extensions/revolution.extension.kenburn.min.js' %}"></script>
     <script type="text/javascript" src="{% static 'revolution/js/extensions/revolution.extension.migration.min.js' %}"></script>
     <script type="text/javascript" src="{% static 'revolution/js/extensions/revolution.extension.parallax.min.js' %}"></script>
+    <script>
+    $(document).ready(function() {
+        $('#like-button').click(function() {
+            var newsId = $(this).data('news-id');
+            var button = $(this);
 
+            $.ajax({
+                url: "{% url 'toggle_like' news.id %}",
+                method: "POST",
+                data: {
+                    'news_id': newsId,
+                    'csrfmiddlewaretoken': '{{ csrf_token }}'
+                },
+                success: function(response) {
+                    var likeCountSpan = button.find('.post-like');
+                    likeCountSpan.text(response.total_likes);
+                }
+            });
+        });
+    });
+    </script>
     <script>
     jQuery(document).ready(function() {
         // revolution slider

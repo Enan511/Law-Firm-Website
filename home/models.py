@@ -1,17 +1,16 @@
 from django.db import models
 from django.contrib.auth.models import User
+from ckeditor.fields import RichTextField
+
+
 class News(models.Model):
     title = models.CharField(max_length=200)
-    content_file = models.FileField(upload_to='news_files',blank=True,null=True)
+    content = RichTextField(blank=True, null=True)
     image = models.ImageField(upload_to='news')
     date_published = models.DateField()
     author = models.CharField(max_length=100)
+    likes = models.IntegerField(default=0)
 
-    @property
-    def content(self):
-        if self.content_file:
-            return self.content_file.read().decode('utf-8')
-        return ""
 
 class Comment(models.Model):
     news = models.ForeignKey(News, related_name='comments', on_delete=models.CASCADE)

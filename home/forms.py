@@ -1,13 +1,15 @@
 from django import forms
-from .models import News,Comment
+from .models import News, Comment
+from ckeditor.fields import RichTextField
+
 
 class NewsForm(forms.ModelForm):
     class Meta:
         model = News
-        fields = ['title', 'content_file', 'image', 'date_published', 'author']
+        fields = ['title', 'content', 'image', 'date_published', 'author']
         widgets = {
             'title': forms.TextInput(attrs={'class': 'form-control'}),
-            'content_file': forms.ClearableFileInput(attrs={'class': 'form-control'}),
+            'content': RichTextField(),
             'image': forms.ClearableFileInput(attrs={'class': 'form-control'}),
             'date_published': forms.DateInput(attrs={'class': 'form-control', 'type': 'date'}),
             'author': forms.TextInput(attrs={'class': 'form-control'}),
@@ -20,6 +22,7 @@ class NewsForm(forms.ModelForm):
         if not content_file:
             raise forms.ValidationError('Please provide content or upload a file.')
         return cleaned_data
+
 
 class CommentForm(forms.ModelForm):
     class Meta:

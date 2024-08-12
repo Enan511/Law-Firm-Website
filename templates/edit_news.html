@@ -1,4 +1,8 @@
-<title> Justica: Upload News </title>
+{% if news.title %}
+    <title>Edit: {{ news.title }}</title>
+{% else %}
+    <title> Justica: Blogs </title>
+{% endif %}
 
 <!DOCTYPE html>
 {% load static %}

@@ -29,7 +29,7 @@ def newsdetail(request, news_id):
 
             # Send the thank you email
             send_mail(
-                'Thank you for your comment',
+                'Thanks from Justica!',
                 'Thanks for commenting on our post!',
                 settings.DEFAULT_FROM_EMAIL,
                 [comment.email],

@@ -12,6 +12,7 @@
     <link rel="icon" href="{% static 'images/icon.png' %}" type="image/gif" sizes="16x16">
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
     <meta content="Justica - Lawyer and Attorney Website Template" name="description" />
+    <meta content="Justica - Lawyer and Attorney Website Template" name="description" />
     <meta content="" name="keywords" />
     <meta content="" name="author" />
     <!--[if lt IE 9]>
@@ -128,7 +129,12 @@
                                 <img alt="{{ news.title }}" src="{{ news.image.url }}" class="newsbanner"/>
                                 <div class="post-text">
                                     <p>{{ news.content|safe }}</p>
-                                    <span class="post-date">{{ news.date_published }}</span>
+                                    <span class="post-date">{{ news.date_published }},</span>
+                                    {% if news.updated_at %}
+                                        <span class="post-date">Last edited on: {{ news.updated_at|date:"d M Y h:i:s A" }}</span>
+                                            {% else %}
+                                            <span class="post-date">No edit history</span>
+                                    {% endif %}
                                     <span class="post-author">{{ news.author }}</span>
                                     <button id="like-button" data-news-id="{{ news.id }}" class="btn btn-like">
                                     <span class="post-like">{{ news.likes }}</span> Likes

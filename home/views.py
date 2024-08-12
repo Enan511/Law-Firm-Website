@@ -2,6 +2,8 @@ from django.shortcuts import render, get_object_or_404, redirect
 from .models import News, Comment
 from .forms import NewsForm, CommentForm
 from django.http import JsonResponse
+from django.core.mail import send_mail
+from django.conf import settings
 
 
 # Create your views here.
@@ -24,6 +26,16 @@ def newsdetail(request, news_id):
             comment = form.save(commit=False)
             comment.news = news
             comment.save()
+
+            # Send the thank you email
+            send_mail(
+                'Thank you for your comment',
+                'Thanks for commenting on our post!',
+                settings.DEFAULT_FROM_EMAIL,
+                [comment.email],
+                fail_silently=False,
+            )
+
             return redirect('newsT', news_id=news_id)  # Redirect to avoid form resubmission
     else:
         form = CommentForm()

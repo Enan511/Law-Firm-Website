@@ -17,10 +17,10 @@ class NewsForm(forms.ModelForm):
 
     def clean(self):
         cleaned_data = super().clean()
-        content_file = cleaned_data.get('content_file')
+        content = cleaned_data.get('content')
 
-        if not content_file:
-            raise forms.ValidationError('Please provide content or upload a file.')
+        if not content:
+            raise forms.ValidationError('Please provide content.')
         return cleaned_data
 
 

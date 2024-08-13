@@ -2,11 +2,17 @@ from django.shortcuts import render, get_object_or_404, redirect
 from .models import News, Comment
 from .forms import NewsForm, CommentForm
 from django.http import JsonResponse
-from django.core.mail import send_mail
+from django.core.mail import send_mail, EmailMessage
 from django.conf import settings
+from threading import Thread
 
 
 # Create your views here.
+def send_email_in_thread(subject, message, from_email, recipient_list):
+    email = EmailMessage(subject, message, from_email, recipient_list)
+    email.send()
+
+
 def home(request):
     news_articles = News.objects.all().order_by('-date_published')
     return render(request, 'index.html', {'news_articles': news_articles})
@@ -27,14 +33,13 @@ def newsdetail(request, news_id):
             comment.news = news
             comment.save()
 
-            # Send the thank you email
-            send_mail(
+            # Send the thank you email in a separate thread
+            Thread(target=send_email_in_thread, args=(
                 'Thanks from Justica!',
                 'Thanks for commenting on our post!',
                 settings.DEFAULT_FROM_EMAIL,
-                [comment.email],
-                fail_silently=False,
-            )
+                [comment.email]
+            )).start()
 
             return redirect('newsT', news_id=news_id)  # Redirect to avoid form resubmission
     else:
